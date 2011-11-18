@@ -6,8 +6,8 @@
  * Copyright 2011, Luca Ongaro
  * Licensed under the MIT license.
  *
- * Date: Wed Nov 09 20:45:46 +0100 2011
-*/ 
+ * Date: 2011-11-18 16:15:54 +0100
+*/
 
 (function( $ ) {
   "use strict";
@@ -25,6 +25,7 @@
         x: $this.width() / 2.0,
         y: $this.height() / 2.0
       },
+      css_class_label: "css_class",
       delayedMode: word_array.length > 50,
       randomClasses: 0,
       nofollow: false
@@ -97,6 +98,8 @@
 
             word_span = $('<span>').attr('id',word_id).attr('class','w' + weight).addClass(random_class).attr('title', word.title || word.text || ''),
             inner_html;
+            if (typeof(word_array[index][options.css_class_label]) != "undefined")
+              word_span.addClass(word_array[index][options.css_class_label])
 
         // Append link if word.url attribute was set
         if (!!word.url) {

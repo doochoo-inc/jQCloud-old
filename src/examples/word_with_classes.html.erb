@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQCloud Example</title>
+    <link rel="stylesheet" type="text/css" href="../jqcloud/jqcloud.css" />
+    <style type="text/css">
+        <%
+            def css_lines(color)
+                new_lines = []
+                r = color[:target][0..1].to_i(16)
+                g = color[:target][2..3].to_i(16)
+                b = color[:target][4..5].to_i(16)
+                steps = [r/13.0, g/13.0, b/13.0]
+                11.times do |i|
+                    step_color = steps.collect{|s| "%02x" % (s*(i+3))}.join
+                    new_lines << "div.jqcloud span.#{color[:label]}.w#{i} { color: ##{step_color}}"
+                end
+                new_lines
+            end
+            red = {:label => "red", :target => "ff2222"}
+            green = {:label => "green", :target => "22ff22"}
+            blue = {:label => "blue", :target => "2222ff"}
+            lines = []
+            lines += css_lines(red)
+            lines += css_lines(blue)
+            lines += css_lines(green)
+            lines.each do |l|
+        %>
+            <%= l %>
+        <% end %>
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    <script type="text/javascript" src="../jqcloud/jqcloud-<%= version %>.js"></script>
+    <script type="text/javascript">
+      var word_list = [
+        {text: "Lorem", weight: 13, url: "https://github.com/DukeLeNoir/jQCloud", css_class: "green"},
+        {text: "Ipsum", weight: 10.5, url: "http://jquery.com/", title: "My Title", css_class: "red"},
+        {text: "Dolor", weight: 9.4, url: "javascript:alert('JavaScript in URL is OK!');", css_class: "green"},
+        {text: "Sit", weight: 8, css_class: "blue"},
+        {text: "Amet", weight: 6.2, css_class: "red"},
+        {text: "Consectetur", weight: 5, css_class: "blue"},
+        {text: "Adipiscing", weight: 5, css_class: "green"},
+        {text: "Elit", weight: 5, css_class: "blue"},
+        {text: "Nam et", weight: 5, css_class: "red"},
+        {text: "Leo", weight: 4, css_class: "blue"},
+        {text: "Sapien", weight: 4, css_class: "green"},
+        {text: "Pellentesque", weight: 3, css_class: "blue"},
+        {text: "habitant", weight: 3, css_class: "blue"},
+        {text: "morbi", weight: 3, css_class: "red"},
+        {text: "tristisque", weight: 3, css_class: "blue"},
+        {text: "senectus", weight: 3, css_class: "green"},
+        {text: "et netus", weight: 3, css_class: "blue"},
+        {text: "et malesuada", weight: 3, css_class: "blue"},
+        {text: "fames", weight: 2, css_class: "red"},
+        {text: "ac turpis", weight: 2, css_class: "blue"},
+        {text: "egestas", weight: 2, css_class: "blue"},
+        {text: "Aenean", weight: 2, css_class: "blue"},
+        {text: "vestibulum", weight: 2, css_class: "blue"},
+        {text: "elit", weight: 2, css_class: "blue"},
+        {text: "sit amet", weight: 2, css_class: "red"},
+        {text: "metus", weight: 2, css_class: "blue"},
+        {text: "adipiscing", weight: 2, css_class: "blue"},
+        {text: "ut ultrices", weight: 2, css_class: "green"},
+        {text: "justo", weight: 1, css_class: "blue"},
+        {text: "dictum", weight: 1, css_class: "red"},
+        {text: "Ut et leo", weight: 1, css_class: "blue"},
+        {text: "metus", weight: 1, css_class: "blue"},
+        {text: "at molestie", weight: 1, css_class: "blue"},
+        {text: "purus", weight: 1, css_class: "blue"},
+        {text: "Curabitur", weight: 1, css_class: "blue"},
+        {text: "diam", weight: 1, css_class: "red"},
+        {text: "dui", weight: 1, css_class: "blue"},
+        {text: "ullamcorper", weight: 1, css_class: "green"},
+        {text: "id vuluptate ut", weight: 1, css_class: "blue"},
+        {text: "mattis", weight: 1, css_class: "blue"},
+        {text: "et nulla", weight: 1, css_class: "green"},
+        {text: "Sed", weight: 1}
+      ];
+      $(document).ready(function() {
+        $("#my_favorite_latin_words").jQCloud(word_list);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>jQCloud Example</h1>
+    <div id="my_favorite_latin_words" style="width: 550px; height: 350px; border: 1px solid #ccc;"></div>
+  </body>
+</html>
